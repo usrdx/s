@@ -1,0 +1,36 @@
+name: Get scripts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  grab_files:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04-arm
+
+    env:
+      GH_TOKEN: "${{ github.token }}"
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+      with:
+        persist-credentials: true
+      
+    - name: Set up build environment
+      run: |
+        curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/refs/heads/master/qbittorrent-nox-static.sh" -o qbt.sh
+        curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/refs/heads/master/qbt-nox-static.bash" -o qbt.bash
+
+    - name: Auto commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        if ! git diff --cached --quiet; then
+          git commit -m "Auto update: Downloaded latest qbt scripts on $(date)"
+          git push
+        else
+          echo "No changes to commit"
+        fi
