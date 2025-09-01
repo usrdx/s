@@ -310,7 +310,8 @@ _set_default_values() {
 	if [[ ${qbt_static_ish:=no} == "yes" ]]; then
 		if [[ ${os_id} =~ ^(debian|ubuntu)$ ]]; then qbt_modules_delete["glibc"]="true"; fi
 		if [[ ${qbt_cross_name} != "default" ]]; then
-			printf '\n%b\n\n' " ${unicode_red_light_circle} You cannot use the ${color_blue_light}-si${color_end} flag with cross compilation${color_end}"
+			printf '\n%b\n' " ${unicode_red_light_circle} You cannot use the ${color_magenta_light}staticish${color_end} with cross compilation${color_end}"
+			printf '\n%b\n\n' " ${unicode_yellow_light_circle} Provided by ${color_yellow_light}qbt_static_ish=\"${color_end}${color_green_light}yes${color_end}${color_yellow_light}\"${color_end} or ${color_cyan_light}-si${color_end}${color_end}"
 			exit
 		fi
 	fi
