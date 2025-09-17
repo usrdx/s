@@ -11,27 +11,27 @@ jobs:
 
     env:
       GH_TOKEN: "${{ github.token }}"
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      with:
-        persist-credentials: true
-      
-    - name: Set up build environment
-      run: |
-        curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/refs/heads/master/qbittorrent-nox-static.sh" -o qbt.sh
-        curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/refs/heads/master/qbt-nox-static.bash" -o qbt.bash
-        curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/refs/heads/master/qi.bash" -o qi.bash
 
-    - name: Auto commit changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        if ! git diff --cached --quiet; then
-          git commit -m "Auto update: Downloaded latest qbt scripts on $(date)"
-          git push
-        else
-          echo "No changes to commit"
-        fi
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: true
+
+      - name: Set up build environment
+        run: |
+          curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/HEAD/qbittorrent-nox-static.sh" -o qbt.sh
+          curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/HEAD/qbt-nox-static.bash" -o qbt.bash
+          curl -sL "https://raw.githubusercontent.com/userdocs/qbittorrent-nox-static/HEAD/qi.bash" -o qi.bash
+
+      - name: Auto commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto update: Downloaded latest qbt scripts on $(date)"
+            git push
+          else
+            echo "No changes to commit"
+          fi
