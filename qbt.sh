@@ -2843,22 +2843,22 @@ _release_info() {
 		|        ${qbt_zlib_type}        |    ${app_version[zlib]}     |
 		|            revision            | ${qbt_revision_version:-0}  |
 
-		## Architecture and build info
-
-		> [!NOTE]
-		> ${source_text}
-		>
-		> These builds were created on Alpine linux using [custom prebuilt musl toolchains](https://github.com/userdocs/qbt-musl-cross-make/releases/latest) for:
-
 		## Docker containers
 
-		This project does not provider containers for these binaries. It provides a binary that other projects use to do that.
+		This project does not provide containers for these binaries. It provides a binary that projects can use to do that.
 
 		An example project thats provides a complete solution: https://hotio.dev/containers/qbittorrent/
 
 		- [libtorrent versions](https://github.com/userdocs/qbittorrent-nox-static?tab=readme-ov-file#libtorrent-versions) \`v1.2\` and \`2.0\` builds in a single container
 		- Tracks [build revisions](https://github.com/userdocs/qbittorrent-nox-static?tab=readme-ov-file#revisions) for critical patches and dependency updates.
 		- wireguard vpn configuration - https://hotio.dev/containers/qbittorrent/#wireguard
+
+		## Architecture and build info
+
+		> [!NOTE]
+		> ${source_text}
+		>
+		> These builds were created on Alpine linux using [custom prebuilt musl toolchains](https://github.com/userdocs/qbt-musl-cross-make/releases/latest) for:
 
 	RELEASE_INFO
 
